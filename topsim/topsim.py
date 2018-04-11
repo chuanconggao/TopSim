@@ -4,20 +4,16 @@ from .localtyping import *
 
 from functools import partial
 
-from .string import str2grams, str2words
-from .grammap import createGramMap, updateGramMap
+from .str2set import str2grams, str2words
+from .grammap import createGramMap, updateGramMap, applyGramMap
 from .index import createIndex
 from .best import findBest
 from . import setsimilarity
 
 class TopSim(object):
-    def _str2set(self, s: str) -> StringSet:
-        return sorted(self.gramMap[g] for g in self._str2set_func(s))
-
-
     def __init__(
             self,
-            sRawStrs: RawStringSet,
+            sRawStrs: Iterable[str],
             caseSensitive: bool = False,
             mapping: str = "gram", numGrams: int = 2
         ) -> None:
@@ -26,9 +22,16 @@ class TopSim(object):
             "word": str2words,
         }[mapping](s if caseSensitive else s.lower())
 
-        self.gramMap = createGramMap(sRawStrs, self._str2set_func)
+        sRawStrSets = [
+            self._str2set_func(sRawStr)
+            for sRawStr in sRawStrs
+        ]
+        self.gramMap = createGramMap(sRawStrSets)
 
-        self.sStrs = [self._str2set(line) for line in sRawStrs]
+        self.sStrs = [
+            applyGramMap(self.gramMap, sRawStrSet)
+            for sRawStrSet in sRawStrSets
+        ]
         self.sIndex = createIndex(self.sStrs)
 
 
@@ -38,9 +41,10 @@ class TopSim(object):
             k: int = 1, tie: bool = False,
             simFunc: str = "jaccard", e: float = 1 / 1000
         ) -> Output:
-        updateGramMap(rRawStr, self._str2set_func, self.gramMap)
+        rRawStrSet = self._str2set_func(rRawStr)
+        updateGramMap(self.gramMap, rRawStrSet)
 
-        rStr = self._str2set(rRawStr)
+        rStr = applyGramMap(self.gramMap, rRawStrSet)
 
         upBoundFunc = {
             "overlap": setsimilarity.overlap_upbound,
