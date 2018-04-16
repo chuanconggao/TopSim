@@ -50,7 +50,7 @@ ts = TopSim([
 print(ts.search("python", k=3)) # Return each similarity and the respective line numbers.
 ```
 
-* Please check `topsim.py` for more optional parameters.
+* Please check `topsim.py` for more optional parameters, like similarity function, etc.
 
 # Examples
 
@@ -72,7 +72,7 @@ py3	0.5
 f2py	0.3333
 ```
 
-* Use Jaccard similarity in default, which puts same weight on matching and non-matching parts.
+* Use Jaccard similarity in default, which puts same weight on matching parts of both the query and the lines.
 
 `ls /usr/local/bin | ./topsim-cli "apple" -k 3`
 
@@ -82,7 +82,7 @@ fpp	0.2
 pphs	0.1667
 ```
 
-* Use Tversky similarity, which puts more weight on matching parts.
+* Use Tversky similarity, which puts more weight on matching parts of the query. Ideal when searching within long lines.
 
 `ls /usr/local/bin | ./topsim-cli "apple" -k 3 -s tversky`
 
