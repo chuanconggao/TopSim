@@ -1,5 +1,6 @@
-[![PyPI version](https://badge.fury.io/py/TopSim.svg)](https://badge.fury.io/py/TopSim)
-
+[![PyPi version](https://img.shields.io/pypi/v/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
+[![PyPi pyversions](https://img.shields.io/pypi/pyversions/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
+[![PyPi license](https://img.shields.io/pypi/l/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
 
 Search the most similar strings against the query in Python 3. State-of-the-art algorithm and data structure are adopted for best efficiency. For both flexibility and efficiency, only set-based similarities are supported right now, including [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index) and [Tversky](https://en.wikipedia.org/wiki/Tversky_index).
 
