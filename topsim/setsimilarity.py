@@ -2,16 +2,7 @@
 
 from .localtyping import *
 
-import math
-
-def safeDivision(a: float, b: float) -> float:
-    if a == 0.0:
-        return 0.0
-    elif b == 0.0:
-        return math.inf
-
-    return a / b
-
+from extratools.mathtools import safediv
 
 numStepForBound = 10
 
@@ -61,7 +52,7 @@ def jaccard_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int
     maxCount = overlap_upbound(**locals())
     return min(
         1.0,
-        safeDivision(maxCount, aLen + bLen - maxCount)
+        safediv(maxCount, aLen + bLen - maxCount)
     )
 
 
@@ -71,7 +62,7 @@ e = 1 / 1000
 def tversky_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int):
     return min(
         1.0,
-        safeDivision(
+        safediv(
             overlap_upbound(**locals()),
             (1 - e) * aLen + e * bLen
         )
