@@ -3,8 +3,7 @@
 from .localtyping import *
 
 from collections import Counter
-
-from .remapper import Remapper
+from itertools import count
 
 def createGramMap(
         sRawStrSets: Iterable[RawStringSet],
@@ -14,10 +13,10 @@ def createGramMap(
     for sRawStrSet in sRawStrSets:
         gramFreqs.update(sRawStrSet)
 
-    gramMapper = Remapper()
+    gramMapper = count(start=0)
 
     return {
-        gram: gramMapper.next()
+        gram: next(gramMapper)
         for gram, _ in sorted(
             gramFreqs.items(),
             key=lambda x: (x[1], x[0])
@@ -29,10 +28,10 @@ def updateGramMap(
         gramMap: GramMap,
         rRawStrSet: RawStringSet
     ) -> None:
-    gramMapper = Remapper(start=-1, step=-1)
+    gramMapper = count(start=-1, step=-1)
 
     gramMap.update(
-        (gram, gramMapper.next())
+        (gram, next(gramMapper))
         for gram in rRawStrSet
         if gram not in gramMap
     )

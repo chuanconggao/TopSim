@@ -3,12 +3,19 @@
 from .localtyping import *
 
 from functools import partial
+import re
 
-from .str2set import str2grams, str2words
+from extratools.strtools import str2grams
+
 from .grammap import createGramMap, updateGramMap, applyGramMap
 from .index import createIndex
 from .best import findBest
 from . import setsimilarity
+
+reSplit = re.compile(r"[_\W]+", re.U)
+def str2words(s: str) -> RawStringSet:
+    return [w for w in reSplit.split(s) if len(w) > 0]
+
 
 class TopSim(object):
     def __init__(

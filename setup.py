@@ -2,28 +2,42 @@
 
 from setuptools import setup
 
+url = "https://github.com/chuanconggao/TopSim"
+version = "0.1.1"
+
 setup(
     name="TopSim",
-    packages=["topsim"],
+
+    packages=["TopSim"],
     scripts=["topsim-cli"],
-    version="0.1",
-    description="Search the most similar strings against the query in Python 3.",
+
+    url=url,
+
+    version=version,
+    download_url=f"{url}/tarball/{version}",
+
+    license="MIT",
+
     author="Chuancong Gao",
     author_email="chuancong@gmail.com",
-    url="https://github.com/chuanconggao/TopSim",
-    download_url="https://github.com/chuanconggao/TopSim/tarball/0.1",
+
+    description="Search the most similar strings against the query in Python 3.",
+    long_description=open("README.md").read(),
+    long_description_content_type="text/markdown",
+
     keywords=[
-        "similarity search",
-        "string"
+        "similarity-search",
+        "string-search"
     ],
-    license="MIT",
     classifiers=[
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3"
     ],
+
     python_requires=">= 3",
     install_requires=[
         "docopt >= 0.6.2",
+        "extratools >= 0.2"
     ]
 )
