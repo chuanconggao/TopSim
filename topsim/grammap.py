@@ -8,7 +8,7 @@ from itertools import count
 def createGramMap(
         sRawStrSets: Iterable[RawStringSet],
     ) -> GramMap:
-    gramFreqs = Counter()
+    gramFreqs: Counter = Counter()
 
     for sRawStrSet in sRawStrSets:
         gramFreqs.update(sRawStrSet)

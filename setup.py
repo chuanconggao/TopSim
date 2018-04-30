@@ -3,7 +3,7 @@
 from setuptools import setup
 
 url = "https://github.com/chuanconggao/TopSim"
-version = "0.1.1"
+version = "0.1.2"
 
 setup(
     name="TopSim",
@@ -38,6 +38,6 @@ setup(
     python_requires=">= 3",
     install_requires=[
         "docopt >= 0.6.2",
-        "extratools >= 0.2"
+        "extratools >= 0.3"
     ]
 )

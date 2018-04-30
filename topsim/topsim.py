@@ -13,8 +13,8 @@ from .best import findBest
 from . import setsimilarity
 
 reSplit = re.compile(r"[_\W]+", re.U)
-def str2words(s: str) -> RawStringSet:
-    return [w for w in reSplit.split(s) if len(w) > 0]
+def str2words(s: str) -> Iterable[str]:
+    return (w for w in reSplit.split(s) if len(w) > 0)
 
 
 class TopSim(object):
@@ -30,7 +30,7 @@ class TopSim(object):
         }[mapping](s if caseSensitive else s.lower())
 
         sRawStrSets = [
-            self._str2set_func(sRawStr)
+            list(self._str2set_func(sRawStr))
             for sRawStr in sRawStrs
         ]
         self.gramMap = createGramMap(sRawStrSets)
