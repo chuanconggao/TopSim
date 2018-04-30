@@ -94,5 +94,25 @@ x86_64-apple-darwin17.3.0-g++-7	0.9935
 x86_64-apple-darwin17.3.0-gcc-7	0.9935
 ```
 
+- Full support of Chinese/Japanese/Korean.
+
+`cat test`
+
+``` text
+地三鲜
+红烧肉
+烤全牛
+木须肉
+土豆炖牛肉
+```
+
+`cat test | topsim-cli "牛肉" -k 3 -s tversky`
+
+``` text
+土豆炖牛肉	0.666
+红烧肉	0.3332
+木须肉	0.3332
+```
+
 # Tip
 I strongly encourage using PyPy instead of CPython to run the script for best performance.

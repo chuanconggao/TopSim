@@ -25,7 +25,7 @@ class TopSim(object):
             mapping: str = "gram", numGrams: int = 2
         ) -> None:
         self._str2set_func = lambda s: {
-            "gram": partial(str2grams, n=numGrams),
+            "gram": partial(str2grams, n=numGrams, pad='\0'),
             "word": str2words,
         }[mapping](s if caseSensitive else s.lower())
 
