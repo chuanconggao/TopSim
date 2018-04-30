@@ -48,7 +48,7 @@ class TopSim(object):
             k: int = 1, tie: bool = False,
             simFunc: str = "jaccard", e: float = 1 / 1000
         ) -> Output:
-        rRawStrSet = self._str2set_func(rRawStr)
+        rRawStrSet = list(self._str2set_func(rRawStr))
         updateGramMap(self.gramMap, rRawStrSet)
 
         rStr = applyGramMap(self.gramMap, rRawStrSet)
