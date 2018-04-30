@@ -3,12 +3,12 @@
 from setuptools import setup
 
 url = "https://github.com/chuanconggao/TopSim"
-version = "0.1.2.1"
+version = "0.1.2.2"
 
 setup(
     name="TopSim",
 
-    packages=["TopSim"],
+    packages=["topsim"],
     scripts=["topsim-cli"],
 
     url=url,
