@@ -1,12 +1,12 @@
-[![PyPi version](https://img.shields.io/pypi/v/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
-[![PyPi pyversions](https://img.shields.io/pypi/pyversions/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
-[![PyPi license](https://img.shields.io/pypi/l/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
+[![PyPI version](https://img.shields.io/pypi/v/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
+[![PyPI pyversions](https://img.shields.io/pypi/pyversions/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
+[![PyPI license](https://img.shields.io/pypi/l/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
 
 Search the most similar strings against the query in Python 3. State-of-the-art algorithm and data structure are adopted for best efficiency. For both flexibility and efficiency, only set-based similarities are supported right now, including [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index) and [Tversky](https://en.wikipedia.org/wiki/Tversky_index).
 
 # Installation
 
-This package is available on PyPi. Just use `pip3 install -U TopSim` to install it.
+This package is available on PyPI. Just use `pip3 install -U TopSim` to install it.
 
 # CLI Usage
 
@@ -58,40 +58,56 @@ print(ts.search("python", k=3)) # Return each similarity and the respective line
 
 * Search the most similar line.
 
-`ls /usr/local/bin | ./topsim-cli "py"`
+`ls /usr/bin | topsim-cli "top"`
 
 ```
-py	1.0
+top	1.0
 ```
 
 * Search the three most similar lines.
 
-`ls /usr/local/bin | ./topsim-cli "py" -k 3`
+`ls /usr/bin | topsim-cli "top" -k 3`
 
 ```
-py	1.0
-py3	0.5
-f2py	0.3333
+top	1.0
+tops	0.5
+iotop	0.4286
 ```
 
-* Use Jaccard similarity in default, which puts same weight on matching parts of both the query and the lines.
+* Use Jaccard similarity in default, which puts same weight on matching both the query and the lines.
 
-`ls /usr/local/bin | ./topsim-cli "apple" -k 3`
-
-```
-gapplication	0.25
-fpp	0.2
-pphs	0.1667
-```
-
-* Use Tversky similarity, which puts more weight on matching parts of the query. Ideal when searching within long lines.
-
-`ls /usr/local/bin | ./topsim-cli "apple" -k 3 -s tversky`
+`ls /usr/bin | topsim-cli "git" -k 5`
 
 ```
-x86_64-apple-darwin17.3.0-c++-7	0.9935
-x86_64-apple-darwin17.3.0-g++-7	0.9935
-x86_64-apple-darwin17.3.0-gcc-7	0.9935
+git	1.0
+wait	0.2857
+git-shell	0.2727
+pluginkit	0.2727
+kinit	0.25
+```
+
+* Use Tversky similarity, which puts most weight on matching the query. Ideal when searching within long lines.
+
+`ls /usr/bin | topsim-cli "git" -k 5 -s tversky`
+
+```
+git	1.0
+git-shell	0.7489
+pluginkit	0.7489
+git-cvsserver	0.7481
+git-upload-pack	0.7478
+```
+
+- For `n`-gram mapping, higher number of `n` for can result in better accuracy but fewer matches.
+
+`ls /usr/bin | topsim-cli "git" -k 5 -s tversky --numgrams=3`
+
+```
+git	1.0
+git-shell	0.5993
+git-cvsserver	0.5988
+git-upload-pack	0.5986
+git-receive-pack	0.5984
 ```
 
 - Full support of Chinese/Japanese/Korean.
