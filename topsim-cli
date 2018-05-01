@@ -12,8 +12,9 @@ Options:
     -k <k>                 Maximum number of search results. [default: 1]
     --tie                  Include all the results with the same similarity of the "k"-th result. May return more than "k" results.
 
-    -s <simfunc>           Use "jaccard", "overlap", or "tversky" as similarity function. [default: jaccard]
-    -e <e>                 Parameter for "tversky" similarity. [default: 0.001]
+    -s, --search           Search the query within each line, rather than match the query against each line.
+                           Tversky similarity is used instead of Jaccard similarity.
+    -e <e>                 Parameter for Tversky similarity. [default: 0.001]
 
     --mapping=<mapping>    Map each string to a set of either "gram"s or "word"s. [default: gram]
     --numgrams=<numgrams>  Number of characters for each gram when mapping by "gram". [default: 2]
@@ -72,7 +73,7 @@ rBest = ts.search(
     argv["<query>"],
     int(argv["-k"]),
     argv["--tie"],
-    argv["-s"],
+    "tversky" if argv["--search"] else "jaccard",
     float(argv["-e"])
 )
 

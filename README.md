@@ -22,7 +22,8 @@ Options:
     -k <k>                 Maximum number of search results. [default: 1]
     --tie                  Include all the results with the same similarity of the "k"-th result. May return more than "k" results.
 
-    -s <simfunc>           Use "jaccard", "overlap", or "tversky" as similarity function. [default: jaccard]
+    -s, --search           Search the query within each line, rather than match the query against each line.
+                           Tversky similarity is used instead of Jaccard similarity.
     -e <e>                 Parameter for "tversky" similarity. [default: 0.001]
 
     --mapping=<mapping>    Map each string to a set of either "gram"s or "word"s. [default: gram]
@@ -88,7 +89,7 @@ kinit	0.25
 
 * Use Tversky similarity, which puts most weight on matching the query. Ideal when searching within long lines.
 
-`ls /usr/bin | topsim-cli "git" -k 5 -s tversky`
+`ls /usr/bin | topsim-cli "git" -k 5 -s`
 
 ```
 git	1.0
@@ -100,7 +101,7 @@ git-upload-pack	0.7478
 
 - For `n`-gram mapping, higher number of `n` for can result in better accuracy but fewer matches.
 
-`ls /usr/bin | topsim-cli "git" -k 5 -s tversky --numgrams=3`
+`ls /usr/bin | topsim-cli "git" -k 5 -s --numgrams=3`
 
 ```
 git	1.0
@@ -122,7 +123,7 @@ git-receive-pack	0.5984
 土豆炖牛肉
 ```
 
-`cat test | topsim-cli "牛肉" -k 3 -s tversky`
+`cat test | topsim-cli "牛肉" -k 3 -s`
 
 ``` text
 土豆炖牛肉	0.666

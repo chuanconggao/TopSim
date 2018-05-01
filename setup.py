@@ -3,7 +3,7 @@
 from setuptools import setup
 
 url = "https://github.com/chuanconggao/TopSim"
-version = "0.1.3"
+version = "0.1.4"
 
 setup(
     name="TopSim",
