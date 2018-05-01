@@ -5,15 +5,9 @@ from .localtyping import *
 from heapq import heappush, heappop
 from collections import defaultdict
 
+from extratools.settools import addtoset
+
 from .setsimilarity import checkSim
-
-def __addToSet(s: Set[Any], x: Any) -> bool:
-    if x in s:
-        return False
-
-    s.add(x)
-    return True
-
 
 def findBest(
         rStr: StringSet,
@@ -36,7 +30,7 @@ def findBest(
             continue
 
         for ln, p in sIndex[item]:
-            if not __addToSet(lnSet, ln):
+            if not addtoset(lnSet, ln):
                 continue
 
             currSim = checkSim(
@@ -48,7 +42,6 @@ def findBest(
 
             if currSim not in simMap:
                 heappush(simHeap, currSim)
-
             simMap[currSim].append(ln)
             totalNum += 1
 
@@ -57,17 +50,14 @@ def findBest(
                 currWorstNum = len(simMap[currWorstSim])
 
                 if totalNum - currWorstNum >= k:
+                    del simMap[currWorstSim]
                     totalNum -= currWorstNum
                     heappop(simHeap)
-                    del simMap[currWorstSim]
+                elif not tie:
+                    del simMap[currWorstSim][currWorstNum - (totalNum - k):]
+                    totalNum = k
 
             if totalNum >= k:
                 worstSim = simHeap[0]
-
-            if not tie and totalNum > k:
-                currWorstNum = len(simMap[worstSim]) - (totalNum - k)
-                del simMap[worstSim][currWorstNum:]
-                totalNum = k
-
 
     return sorted(simMap.items(), key=lambda x: x[0], reverse=True)

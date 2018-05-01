@@ -4,7 +4,7 @@ from .localtyping import *
 
 from extratools.mathtools import safediv
 
-numStepForBound = 10
+__numStepForBound = 10
 
 def checkSim(
         bound: float,
@@ -36,19 +36,18 @@ def checkSim(
             count += 1
 
         step += 1
-        if step % numStepForBound == 0:
-            if bound > upBoundFunc(la, i, lb, j, count):
-                return None
+        if step % __numStepForBound == 0 and bound > upBoundFunc(la, i, lb, j, count):
+            return None
 
     sim = upBoundFunc(la, i, lb, j, count)
     return None if bound > sim else sim
 
 
-def overlap_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int):
+def overlap_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int) -> float:
     return count + min(aLen - aPassed, bLen - bPassed)
 
 
-def jaccard_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int):
+def jaccard_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int) -> float:
     maxCount = overlap_upbound(**locals())
     return min(
         1.0,
@@ -59,7 +58,7 @@ def jaccard_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int
 # Assume all sets are shorter than 1 / e
 e = 1 / 1000
 
-def tversky_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int):
+def tversky_upbound(aLen: int, aPassed: int, bLen: int, bPassed: int, count: int) -> float:
     return min(
         1.0,
         safediv(
