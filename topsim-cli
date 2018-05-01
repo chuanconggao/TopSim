@@ -25,11 +25,9 @@ Options:
 import sys
 from functools import partial
 import os
-import time
-import resource
-import gc
 
 from docopt import docopt
+from extratools.debugtools import stopwatch, peakmem
 
 from topsim import TopSim
 
@@ -37,18 +35,11 @@ argv = docopt(__doc__)
 
 print2 = partial(print, file=(open(os.devnull, 'w') if argv["--quiet"] else sys.stderr))
 
-startTime = time.clock()
 def printResourceUsage():
-    global startTime
-
-    gc.collect()
-
     print2("{:.2} sec | {:.2} MB".format(
-        time.clock() - startTime,
-        resource.getrusage(resource.RUSAGE_SELF).ru_maxrss / 1024 / 1024
+        stopwatch()[1],
+        peakmem() / 1024 / 1024
     ))
-
-    startTime = time.clock()
 
 
 sRawStrs = [

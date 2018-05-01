@@ -38,6 +38,6 @@ setup(
     python_requires=">= 3",
     install_requires=[
         "docopt >= 0.6.2",
-        "extratools >= 0.3"
+        "extratools >= 0.3.5"
     ]
 )
