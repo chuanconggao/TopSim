@@ -22,7 +22,7 @@ Options:
     -k <k>                 Maximum number of search results. [default: 1]
     --tie                  Include all the results with the same similarity of the "k"-th result. May return more than "k" results.
 
-    -s, --search           Search the query within each line, rather than match the query against each line.
+    -s, --search           Search the query within each line rather than against the whole line, by preferring partial matching of the line.
                            Tversky similarity is used instead of Jaccard similarity.
     -e <e>                 Parameter for "tversky" similarity. [default: 0.001]
 
