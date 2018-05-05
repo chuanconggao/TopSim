@@ -6,9 +6,9 @@ from functools import partial
 import re
 
 from extratools.strtools import str2grams
+from extratools.dicttools import invertedindex
 
 from .grammap import createGramMap, updateGramMap, applyGramMap
-from .index import createIndex
 from .best import findBest
 from . import setsimilarity
 
@@ -39,7 +39,7 @@ class TopSim(object):
             applyGramMap(self.gramMap, sRawStrSet)
             for sRawStrSet in sRawStrSets
         ]
-        self.sIndex = createIndex(self.sStrs)
+        self.sIndex = invertedindex(self.sStrs)
 
 
     def search(

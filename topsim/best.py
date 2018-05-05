@@ -26,9 +26,6 @@ def findBest(
         if upBoundFunc(len(rStr), i + 1, len(rStr) - (i + 1) + 1, 1, 1) < worstSim:
             break
 
-        if item not in sIndex or i > 0 and item == rStr[i - 1]:
-            continue
-
         for ln, p in sIndex[item]:
             if not addtoset(lnSet, ln):
                 continue
