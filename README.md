@@ -6,6 +6,8 @@ Search the most similar strings against the query in Python 3. State-of-the-art 
 
 - For simpler code, some general purpose functions have been moved to be part of a new library [extratools](https://github.com/chuanconggao/extratools).
 
+- [TopEmoji](https://github.com/chuanconggao/TopEmoji) an interesting application of this library, searching the most similar emojis against the query.
+
 # Installation
 
 This package is available on PyPI. Just use `pip3 install -U TopSim` to install it.
