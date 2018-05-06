@@ -10,6 +10,7 @@ setup(
 
     packages=["topsim"],
     scripts=["topsim-cli"],
+    include_package_data=True,
 
     url=url,
 
