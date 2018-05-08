@@ -2,7 +2,9 @@
 [![PyPI pyversions](https://img.shields.io/pypi/pyversions/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
 [![PyPI license](https://img.shields.io/pypi/l/TopSim.svg)](https://pypi.python.org/pypi/TopSim/)
 
-Search the most similar strings against the query in Python 3. State-of-the-art algorithm and data structure are adopted for best efficiency. For both flexibility and efficiency, only set-based similarities are supported right now, including [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index) and [Tversky](https://en.wikipedia.org/wiki/Tversky_index).
+Search the most similar strings against the query in Python 3. State-of-the-art algorithm and data structure are adopted for best efficiency.
+
+- For both flexibility and efficiency, only set-based similarities are included right now, including [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index) and [Tversky](https://en.wikipedia.org/wiki/Tversky_index).
 
 - For simpler code, some general purpose functions have been moved to be part of a new library [extratools](https://github.com/chuanconggao/extratools).
 
@@ -20,11 +22,21 @@ topemoji-cli "baby" -k 5
 🚼	baby symbol	0.6659
 ```
 
-# Installation
+## Reference
+
+This library is originally part of the implementation for our [research paper](https://dl.acm.org/citation.cfm?doid=3106426.3106484).
+
+``` text
+Preference-driven similarity join.
+Chuancong Gao, Jiannan Wang, Jian Pei, Rui Li, Yi Chang:
+Proceedings of the International Conference on Web Intelligence, 2017.
+```
+
+## Installation
 
 This package is available on PyPI. Just use `pip3 install -U TopSim` to install it.
 
-# CLI Usage
+## CLI Usage
 
 You can simply use the algorithm on terminal.
 
@@ -71,7 +83,7 @@ print(ts.search("python", k=3)) # Return each similarity and the respective line
 
 * Please check `topsim.py` for more optional parameters, like similarity function, etc.
 
-# Examples
+## Examples
 
 * Search the most similar line.
 
@@ -147,5 +159,5 @@ git-receive-pack	0.5984
 木须肉	0.3332
 ```
 
-# Tip
+## Tip
 I strongly encourage using PyPy instead of CPython to run the script for best performance.
