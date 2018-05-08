@@ -6,7 +6,19 @@ Search the most similar strings against the query in Python 3. State-of-the-art 
 
 - For simpler code, some general purpose functions have been moved to be part of a new library [extratools](https://github.com/chuanconggao/extratools).
 
-- [TopEmoji](https://github.com/chuanconggao/TopEmoji) an interesting application of this library, searching the most similar emojis against the query.
+- [TopEmoji](https://github.com/chuanconggao/TopEmoji) is an interesting application of this library, searching the most similar emojis against the query.
+
+``` bash
+topemoji-cli "baby" -k 5
+```
+
+``` text
+👶	baby	1.0
+👼	baby angel	0.666
+🐤	baby chick	0.666
+🍼	baby bottle	0.6659
+🚼	baby symbol	0.6659
+```
 
 # Installation
 
