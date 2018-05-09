@@ -28,7 +28,7 @@ This library is originally part of the implementation for our [research paper](h
 
 ``` text
 Preference-driven similarity join.
-Chuancong Gao, Jiannan Wang, Jian Pei, Rui Li, Yi Chang:
+Chuancong Gao, Jiannan Wang, Jian Pei, Rui Li, Yi Chang.
 Proceedings of the International Conference on Web Intelligence, 2017.
 ```
 
