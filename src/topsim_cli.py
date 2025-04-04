@@ -75,3 +75,8 @@ print2()
 for sim, lns in rBest:
     for ln in lns:
         print("{}\t{:.4}".format(sRawStrs[ln], sim))
+
+
+# Placeholder function for pyproject.toml requirement of scripts
+def run():
+    pass
