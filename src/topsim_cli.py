@@ -27,7 +27,7 @@ from functools import partial
 import os
 
 from docopt import docopt
-from extratools.debugtools import stopwatch, peakmem
+from extratools_core.debug import stopwatch, peakmem
 
 from topsim import TopSim
 
@@ -37,9 +37,11 @@ print2 = partial(print, file=(open(os.devnull, 'w') if argv["--quiet"] else sys.
 
 def printResourceUsage():
     print2("{:.2} sec | {:.2} MB".format(
-        stopwatch()[1],
+        stopwatch(),
         peakmem() / 1024 / 1024
     ))
+
+stopwatch()
 
 
 sRawStrs = [

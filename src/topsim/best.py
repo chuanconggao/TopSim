@@ -5,7 +5,7 @@ from .localtyping import *
 from heapq import heappush, heappop
 from collections import defaultdict
 
-from extratools.settools import addtoset
+from extratools_core.set import add_to_set
 
 from .setsimilarity import checkSim
 
@@ -27,12 +27,12 @@ def findBest(
             break
 
         for ln, p in sIndex[item]:
-            if not addtoset(lnSet, ln):
+            if not add_to_set(lnSet, ln):
                 continue
 
             currSim = checkSim(
                 worstSim, upBoundFunc,
-                rStr, sStrs[ln], i + 1, p + 1, 1
+                rStr, sStrs[ln], i + 1, p[0] + 1, 1
             )
             if currSim is None:
                 continue

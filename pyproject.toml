@@ -7,16 +7,12 @@ name = "TopSim"
 description = "Search the most similar strings against the query in Python 3."
 version = "0.1.5"
 authors = [{ name = "Chuancong Gao", email = "chuanconggao@users.noreply.github.com" }]
-requires-python = ">=3.9"
+requires-python = ">=3.12"
 readme = "README.md"
 license = "MIT"
 dependencies = [
     "docopt>=0.6.2",
-    "extratools>=0.5",
-    # Needed by extratools
-    "regex>=2024.11.6",
-    # Needed by extratools
-    "tagstats>=0.1.2",
+    "extratools-core>=0.1.0",
 ]
 keywords = [
     "similarity-search",

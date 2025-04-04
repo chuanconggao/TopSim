@@ -7,6 +7,6 @@ StringSet = List[int]
 
 GramMap = Dict[str, int]
 
-Index = Dict[int, List[Tuple[int, int]]]
+Index = Mapping[int, Sequence[Tuple[int, Sequence[int]]]]
 
 Output = Iterable[Tuple[float, Iterable[int]]]

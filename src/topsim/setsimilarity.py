@@ -2,7 +2,7 @@
 
 from .localtyping import *
 
-from extratools.mathtools import safediv
+from extratools_core.math import safediv
 
 __numStepForBound = 10
 

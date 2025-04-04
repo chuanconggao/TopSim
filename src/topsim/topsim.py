@@ -5,8 +5,8 @@ from .localtyping import *
 from functools import partial
 import re
 
-from extratools.strtools import str2grams
-from extratools.dicttools import invertedindex
+from extratools_core.str import str_to_grams
+from extratools_core.dict import inverted_index
 
 from .grammap import createGramMap, updateGramMap, applyGramMap
 from .best import findBest
@@ -25,7 +25,7 @@ class TopSim(object):
             mapping: str = "gram", numGrams: int = 2
         ) -> None:
         self._str2set_func = lambda s: {
-            "gram": partial(str2grams, n=numGrams, pad='\0'),
+            "gram": partial(str_to_grams, n=numGrams, pad='\0'),
             "word": str2words,
         }[mapping](s if caseSensitive else s.lower())
 
@@ -39,7 +39,7 @@ class TopSim(object):
             applyGramMap(self.gramMap, sRawStrSet)
             for sRawStrSet in sRawStrSets
         ]
-        self.sIndex = invertedindex(self.sStrs)
+        self.sIndex = inverted_index(self.sStrs)
 
 
     def search(
