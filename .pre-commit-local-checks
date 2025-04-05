@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+. .envrc
+
+mypy --install-types src
+
+pytest
