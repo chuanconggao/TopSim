@@ -1,12 +1,10 @@
-#! /usr/bin/env python3
+from collections.abc import Iterable, Mapping, Sequence
 
-from typing import *
+RawStringSet = list[str]
+StringSet = list[int]
 
-RawStringSet = List[str]
-StringSet = List[int]
+GramMap = dict[str, int]
 
-GramMap = Dict[str, int]
+Index = Mapping[int, Sequence[tuple[int, Sequence[int]]]]
 
-Index = Mapping[int, Sequence[Tuple[int, Sequence[int]]]]
-
-Output = Iterable[Tuple[float, Iterable[int]]]
+Output = Iterable[tuple[float, Iterable[int]]]

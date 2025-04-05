@@ -20,31 +20,37 @@ Options:
     --numgrams=<numgrams>  Number of characters for each gram when mapping by "gram". [default: 2]
 
     --quiet                Do not print additional information to standard error.
-"""
+"""  # noqa: E501
 
+import os
 import sys
 from functools import partial
-import os
 
 from docopt import docopt
-from extratools_core.debug import stopwatch, peakmem
+from extratools_core.debug import peakmem, stopwatch
 
 from topsim import TopSim
+from topsim.localtyping import Output
 
 argv = docopt(__doc__)
 
-print2 = partial(print, file=(open(os.devnull, 'w') if argv["--quiet"] else sys.stderr))
+print2 = partial(
+    print,
+    file=(
+        open(os.devnull, 'w', encoding='utf-8') if argv["--quiet"]
+        else sys.stderr
+    ),
+)
 
-def printResourceUsage():
-    print2("{:.2} sec | {:.2} MB".format(
-        stopwatch(),
-        peakmem() / 1024 / 1024
-    ))
+
+def print_resource_usage() -> None:
+    print2(f"{stopwatch() * 1_000:.2f} ms | {peakmem() / 1024 / 1024 / 1024:.2f} KB")
+
 
 stopwatch()
 
 
-sRawStrs = [
+s_raw_strs = [
     line.rstrip('\r\n')
     for line in (open(argv["<file>"]) if argv["<file>"] else sys.stdin)
 ]
@@ -52,31 +58,31 @@ sRawStrs = [
 print2("Indexing...", end=" ")
 
 ts = TopSim(
-    sRawStrs,
-    argv["-I"],
+    s_raw_strs,
+    case_sensitive=argv["-I"],
     mapping=argv["--mapping"],
-    numGrams=int(argv["--numgrams"])
+    num_grams=int(argv["--numgrams"]),
 )
 
-printResourceUsage()
+print_resource_usage()
 
 print2("Searching...", end=" ")
 
-rBest = ts.search(
+r_best: Output = ts.search(
     argv["<query>"],
-    int(argv["-k"]),
-    argv["--tie"],
-    "tversky" if argv["--search"] else "jaccard",
-    float(argv["-e"])
+    k=int(argv["-k"]),
+    tie=argv["--tie"],
+    sim_func="tversky" if argv["--search"] else "jaccard",
+    e=float(argv["-e"]),
 )
 
-printResourceUsage()
+print_resource_usage()
 
 print2()
 
-for sim, lns in rBest:
+for sim, lns in r_best:
     for ln in lns:
-        print("{}\t{:.4}".format(sRawStrs[ln], sim))
+        print(f"{s_raw_strs[ln]}\t{sim:.4}")
 
 
 # Placeholder function for pyproject.toml requirement of scripts

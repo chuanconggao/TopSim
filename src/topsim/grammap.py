@@ -1,44 +1,44 @@
-#! /usr/bin/env python3
-
-from .localtyping import *
-
 from collections import Counter
+from collections.abc import Iterable
 from itertools import count
 
-def createGramMap(
-        sRawStrSets: Iterable[RawStringSet],
-    ) -> GramMap:
-    gramFreqs: Counter = Counter()
+from .localtyping import GramMap, RawStringSet, StringSet
 
-    for sRawStrSet in sRawStrSets:
-        gramFreqs.update(sRawStrSet)
 
-    gramMapper = count(start=0)
+def create_gram_map(
+    s_raw_str_sets: Iterable[RawStringSet],
+) -> GramMap:
+    gram_freqs: Counter = Counter()
+
+    for s_raw_str_set in s_raw_str_sets:
+        gram_freqs.update(s_raw_str_set)
+
+    gram_mapper = count(start=0)
 
     return {
-        gram: next(gramMapper)
+        gram: next(gram_mapper)
         for gram, _ in sorted(
-            gramFreqs.items(),
-            key=lambda x: (x[1], x[0])
+            gram_freqs.items(),
+            key=lambda x: (x[1], x[0]),
         )
     }
 
 
-def updateGramMap(
-        gramMap: GramMap,
-        rRawStrSet: RawStringSet
-    ) -> None:
-    gramMapper = count(start=-1, step=-1)
+def update_gram_map(
+    gram_map: GramMap,
+    r_raw_str_set: RawStringSet,
+) -> None:
+    gram_mapper = count(start=-1, step=-1)
 
-    gramMap.update(
-        (gram, next(gramMapper))
-        for gram in rRawStrSet
-        if gram not in gramMap
+    gram_map.update(
+        (gram, next(gram_mapper))
+        for gram in r_raw_str_set
+        if gram not in gram_map
     )
 
 
-def applyGramMap(
-        gramMap: GramMap,
-        rRawStrSet: RawStringSet
-    ) -> StringSet:
-    return sorted(gramMap[gram] for gram in rRawStrSet)
+def apply_gram_map(
+    gram_map: GramMap,
+    r_raw_str_set: RawStringSet,
+) -> StringSet:
+    return sorted(gram_map[gram] for gram in r_raw_str_set)
