@@ -29,3 +29,24 @@ Repository = "https://github.com/chuanconggao/TopSim"
 
 [project.scripts]
 topsim-cli = "topsim_cli:run"
+
+[dependency-groups]
+dev = [
+    "pytest-cov>=4.1.0",
+    "mypy>=1.7.1",
+    "ipython>=9.0.2",
+]
+
+[tool.coverage.run]
+source = [
+    "src",
+]
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "--cov --cov-report xml:cov.xml --cov-report html --cov-report term-missing test"
+pythonpath = [
+    "src",
+]
