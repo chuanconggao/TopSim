@@ -25,14 +25,15 @@ Options:
 import os
 import sys
 from functools import partial
+from typing import cast
 
-from docopt import docopt
+from docopt import ParsedOptions, docopt
 from extratools_core.debug import peakmem, stopwatch
 
 from topsim import TopSim
 from topsim.localtyping import Output
 
-argv = docopt(__doc__)
+argv: ParsedOptions = docopt(cast("str", __doc__))
 
 print2 = partial(
     print,
