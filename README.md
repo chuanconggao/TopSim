@@ -38,6 +38,8 @@ Proceedings of the International Conference on Web Intelligence, 2017.
 
 This package is available on PyPI. Just use `pip3 install -U TopSim` to install it.
 
+Note that starting with version `0.2.0`, only Python 3.12+ is supported.
+
 ## CLI Usage
 
 You can simply use the algorithm on terminal.
@@ -80,10 +82,11 @@ ts = TopSim([
     "python3.6",
 ])
 
-print(ts.search("python", k=3)) # Return each similarity and the respective line numbers.
+# Return each similarity and the respective line numbers.
+ts.search("python", k=3)
 ```
 
-* Please check `topsim.py` for more optional parameters, like similarity function, etc.
+* Please check code for more optional parameters, like similarity function, etc.
 
 ## Examples
 
@@ -160,6 +163,3 @@ git-receive-pack	0.5984
 红烧肉	0.3332
 木须肉	0.3332
 ```
-
-## Tip
-I strongly encourage using PyPy instead of CPython to run the script for best performance.
